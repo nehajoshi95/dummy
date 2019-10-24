@@ -14,9 +14,11 @@ class ResumesController < ApplicationController
 	
 	 end   
 			
-	 def create 
+	 def create
+	 # debugger 
+	 		cat = Category.find(params[:resume][:id])
 			# @resume = Resume.new(resume_params)
-			@resume = @resume = Resume.new(check: params["bike"].to_s+" " +  params["boat"].to_s+" " + params["car"].to_s+ " " + params["Watch"].to_s + " " + params["male"].to_s+ " " +params["Hockey"].to_s+ " "+ params["handball"].to_s, name: params[:resume][:name],attachment: params[:resume][:attachment])
+			@resume = cat.resumes.new(check: params["bike"].to_s+" " +  params["car"].to_s+" " + params["boat"].to_s+ " " +params["Music"].to_s+""+""+params["Sing"].to_s+""+ params["Watch"].to_s+""+params["male"].to_s + " " + params["female"].to_s+ " " +params["other"].to_s+""+params["Hockey"].to_s+ " "+ params["Football"].to_s+""+ params["other"].to_s+""+ params["Basketball"].to_s+""+ params["Baseball"].to_s+""+params["handball"].to_s , name: params[:resume][:name],attachment: params[:resume][:attachment])
 			if @resume.save   
 				 redirect_to resumes_path, notice: "Successfully uploaded."   
 			else   
