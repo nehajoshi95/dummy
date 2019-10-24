@@ -1,0 +1,28 @@
+<%= form_for @user do |f|%>
+	<%= f.label :name%>
+	<%= f.text_field :name%>
+	<%= f.label :surname%>
+	<%= f.text_field :surname%>
+	<%= f.label :state%>
+	<%= f.text_field :state%>
+	<%= f.check_box :status, :onclick =>  "myFunction('#{@user.id}');"%>
+	<%= f.submit :update_user%>
+<%end%>
+<%= link_to 'Back', users_path(@user)%>
+
+<script type="text/javascript">
+	function myFunction(x) {
+		var name = $("#user_name").val();
+		var surname = $("#user_surname").val();
+		var state = $("#user_state").val();
+		$.ajax({
+			type: 'POST',
+			data : { id: x, name: name, surname: surname,state: state },
+			url: '/users/create_user',
+			dataType: "JSON",
+			success: function (data) {
+				alert("data saved");
+			}
+		});
+	}
+</script>

@@ -1,0 +1,13 @@
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Surame</th>
+		<th>State</th>
+	</tr>
+	<tr>
+		<th><%= @user.name%></th>
+		<th><%= @user.surname%></th>
+		<th><%= @user.state%></th>
+	</tr>
+	<th><%= link_to 'Back', users_path(@user)%></th>
+</table>

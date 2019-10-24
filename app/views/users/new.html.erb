@@ -1,0 +1,60 @@
+
+<%= form_for @user do |f|%>
+	<%= f.label :name%>
+	<%= f.text_field :name%>
+	<%= f.label :surname%>
+	<%= f.text_field :surname%>
+	<%= f.label :state%>
+	<%= f.text_field :state%>
+	<%= f.label :Status%>
+	<%= f.check_box :status, :onclick =>  "myFunction();"%>
+	<%= f.label :Image%>
+	<%= f.file_field :avatar, multiple: true %>
+	<div class="field">
+	  <%= f.label :category %><br />
+	  <%#= f.collection_select :category_id, @user, :id, :name %>
+
+	</div>
+	<%= f.submit %>
+<%end%>
+<%= link_to 'View', users_path(@user)%>
+
+<!-- <div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal">x</button>
+	<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+</div>
+<div class="modal-body">
+	*Modal content comes here*
+</div> -->
+<div class="modal-footer">
+	<button class="btn btn-primary">Save</button>
+</div>
+<script type="text/javascript">
+	function myFunction() {
+		var name = $("#user_name").val();
+		var surname = $("#user_surname").val();
+		var state = $("#user_state").val();
+		$.ajax({
+			type: 'POST',
+			data : { name: name, surname: surname,state: state },
+			url: '/users/create_user',
+			dataType: "JSON",
+			success: function (data) {
+				alert("data saved");
+			}
+		});
+	}
+</script>
+
+<div class="dropdown">
+		<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Dropdown
+		<span class="caret"></span></button>
+		<ul class="dropdown-menu">
+			<li><a href="#">Category1</a></li>
+			<li><a href="#">Category2</a></li>
+			<li><a href="#">Category3</a></li>
+		</ul>
+	</div>
+</div>
+
+

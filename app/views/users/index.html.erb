@@ -1,0 +1,51 @@
+
+<div >
+<%= link_to 'New User', new_user_path%>
+	
+</div>
+<div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content"></div>
+  </div>
+</div>
+<table border="4">
+	<tr>
+		<th>Name</th>
+		<th>surname</th>
+		<th>State</th>
+		<th colspan="4">Actions</th>
+	</tr>
+		<%@users.each do |f|%>
+			<tr class="text-success">
+				<th><%= f.name%></th>
+				<th><%= f.surname%></th>
+				<th><%= f.state%></th>
+
+				<th><%= link_to 'Edit', edit_user_path(f.id)%></th>
+				<th><%= link_to 'Delete', user_path(f),
+              method: :delete, :onclick => "myFunction('#{f.id}')" %></th>
+				<th><%= link_to 'Show', user_path(f)%></th>
+			</tr>
+		<%end%>
+
+</table>
+
+
+<script type="text/javascript">
+	function myFunction(x) {
+		$.ajax({
+				type: 'GET',
+				url: '/users/destroy',
+				// dataType: "JSON", 
+				data: {id: x},
+				success: function (data) {
+					alert("User deleted");
+				}
+			});
+	}
+</script>
+<!-- <style type="text/css">
+	#modal-window{
+		padding-top: 5px;
+	}
+</style> -->

@@ -1,0 +1,191 @@
+<thead>
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+				<link href="http://www.jqueryscript.net/demo/jQuery-Plugin-For-Multi-Select-List-with-Checkboxes-MultiSelect/jquery.multiselect.css" rel="stylesheet" type="text/css">
+				<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+				<script src="http://www.jqueryscript.net/demo/jQuery-Plugin-For-Multi-Select-List-with-Checkboxes-MultiSelect/jquery.multiselect.js"></script>
+</thead>
+<%= form_for @resume, html: { multipart: true } do |f| %>   
+			<%= f.label :name %>   
+			<%= f.text_field :name %>   
+			<br><br> 
+			<%= f.label :attachment %>   
+			<%= f.file_field :attachment %>   
+			<br> 
+			<%= f.label :category %><br>
+			<%= f.collection_select :id, Category.all , :id, :name, prompt: "#{ "select category"}"  %>
+	<div class="row cat-1" style="display: none">
+		<div class="col-md-3">
+			<input type="checkbox" name="bike" value="Bike"> I have a bike<br>
+			<input type="checkbox" name="car" value="Car"> I have a car<br>
+			<input type="checkbox" name="boat" value="Boat"> I have a boat<br>
+		</div>
+	</div>
+	<div class="row cat-2" style="display: none">
+		<div class="col-md-3">
+			<input type="checkbox" name="Music" value="Music"> I have a bike<br>
+			<input type="checkbox" name="Sing" value="Sing"> I have a car<br>
+			<input type="checkbox" name="Watch" value="Watch"> I have a boat<br>
+		</div>
+	</div>
+	<div class="row cat-3" style="display: none;">
+		<div class="col-md-3">
+			<input type="radio" name="male" value="male"> Male<br>
+			<input type="radio" name="female" value="female"> Female<br>
+			<input type="radio" name="other" value="other"> Other<br><br>
+		</div>
+	</div>
+
+	<div class="row cat-4" style="display: none">
+		<div class="col-md-3">
+			<input type="radio" name="Hockey" value="Hockey"> Male<br>
+			<input type="radio" name="Football" value="Football"> Female<br>
+			<input type="radio" name="other" value="other"> Other<br><br>
+		</div>
+	</div>
+
+	<div class="row cat-5" style="display: none">
+		<div class="col-md-3">
+			<input type="checkbox" name="Basketball" value="Basketball"> I play basketball<br>
+			<input type="checkbox" name="Baseball" value="Baseball"> I play baseball<br>
+			<input type="checkbox" name="handball" value="handball"> I play handball<br>
+		</div>
+	</div>
+
+<%= f.submit%>
+<% end %>
+
+<div class="container">
+		<h2>Mutiselect</h2>
+		<select name="country" multiple class="form-control">
+			<option value="" id="list">Category1</option>
+			<option value="AF">Category2</option>
+			<option value="AL">Category3</option>
+		</select>
+		<h2>Values</h2>
+			<select name="basicOptgroup[]" multiple="multiple">
+					<optgroup label="Category1">
+						<option value="C++ / C#">Task</option>
+						<option value="Java">Java</option>
+						<option value="Objective-C">Objective-C</option>
+					</optgroup>
+					<optgroup label="Category2">
+						<option value="JavaScript">Java</option>
+					</optgroup>
+					<optgroup label="Category3">
+							<option value="Perl">Perl</option>
+							<option value="PHP">PHP</option>
+							<option value="Ruby on Rails">Ruby on Rails</option>
+					</optgroup>
+			</select>
+	</div>
+
+
+<script type="text/javascript">
+	$('#resume_id').change(function(){
+		var selectedValue=$(this).val();
+		if (selectedValue == 1){
+			$('.cat-1').show();
+		}
+		else if (selectedValue == 2) {
+			$('.cat-2').show();
+			$('.cat-1').hide();
+		}
+		else if (selectedValue == 3) {
+			$('.cat-3').show();
+			$('.cat-1').hide();
+			$('.cat-2').hide();
+		}
+		else if (selectedValue == 4) {
+			$('.cat-1').hide();
+			$('.cat-2').hide();
+			$('.cat-3').hide();
+			$('.cat-4').show();
+		}
+		else if (selectedValue == 5) {
+			$('.cat-5').show();
+			$('.cat-1').hide();
+			$('.cat-2').hide();
+			$('.cat-3').hide();
+			$('.cat-4').hide();
+		}
+	})
+</script>
+
+<style>
+		body {
+			font-family: 'Open Sans' Arial, Helvetica, sans-serif
+		}
+	 
+		ul,
+		li {
+			margin: 0;
+			padding: 0;
+			list-style: nont;
+		}
+	 
+		.label {
+			color: #000;
+			font-size: 16px;
+		}
+	 
+		.container {
+			max-width: 728px;
+		}
+</style>
+	 
+	<script type="text/javascript">
+			$('select[multiple]').multiselect({
+				columns: 4,
+				placeholder: 'Select options'
+			});
+	 </script>
+
+
+
+
+	<%#= f.submit "Save" %>   
+	 <%# end %>   
+
+<!-- <script type="text/javascript">
+	$('#resume_id').change(function(){
+
+
+
+		var x = document.createElement("INPUT");
+		x.setAttribute("type", "checkbox","name");
+		document.body.appendChild(x);
+
+		var y = document.createElement("INPUT");
+		y.setAttribute("type", "checkbox");
+		document.body.appendChild(y);
+
+		var z = document.createElement("INPUT");
+		z.setAttribute("type", "checkbox");
+		document.body.appendChild(z);
+
+		$.ajax({
+			type: 'GET',
+			url: '/resumes/create_check',
+			data: {x: x, y: y, z: z},
+			success: function (data) {
+			},
+			error: function(error) {
+			}
+
+});
+
+
+
+
+	});
+
+		// if (items == '1'){
+		// 	debugger
+	//   	document.getElementByName('vehicle1').printMe();
+	//   }
+	//   else if{
+	//   	document.getElementByName('colors').printMe();
+	//   }	
+
+
+</script> -->
